@@ -8,19 +8,22 @@ interface Product {
   price: number;
   image: string;
 }
-
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    getProducts().then(setProducts).catch(console.error);
+    api.get("/products").then(res => setProducts(res.data)).catch(console.error);
   }, []);
 
-  return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-      {products.map((p) => (
-        <ProductCard key={p.id} product={p} />
-      ))}
+
+ return (
+    <div>
+      <h1>商品列表</h1>
+      <ul>
+        {products.map(p => (
+          <li key={p.id}>{p.name} - {p.price}</li>
+        ))}
+      </ul>
     </div>
   );
 }
