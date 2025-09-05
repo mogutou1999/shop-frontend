@@ -1,11 +1,17 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, // 从环境变量读取
+  baseURL: import.meta.env.VITE_API_BASE_URL, // 从环境变量读取后端地址
   timeout: 5000,
 });
 
-export default api;
+// 添加商品接口示例
+export const addProductApi = (data: {
+  name: string;
+  price: number;
+  stock: number;
+  remaining: number;
+}) => api.post("/products", data);
 
 // 示例：获取商品列表
 export const getProducts = async () => {
