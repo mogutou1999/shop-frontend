@@ -1,11 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import AddProductModal from "./AddProductModal";
 
-export default function Navbar() {
+interface NavbarProps {
+  cartItems: any[];
+}
+
+const Navbar: React.FC<NavbarProps> = ({ cartItems }) => {
   return (
-    <nav className="bg-white shadow p-4 flex justify-between">
-      <Link to="/" className="font-bold text-lg">Shop Bot</Link>
-      <Link to="/checkout" className="text-blue-500">Checkout</Link>
+    <nav className="bg-blue-500 p-4 text-white flex justify-between">
+      <div>我的商城</div>
+      <div>购物车: {cartItems.length}</div>
+      <AddProductModal />
     </nav>
   );
-}
+};
+
+export default Navbar;
