@@ -1,14 +1,21 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Checkout from "./pages/Checkout";
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
 
-export default function App() {
+const App: React.FC = () => {
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: "可乐", price: 5, quantity: 2 },
+    { id: 2, name: "薯片", price: 10, quantity: 1 },
+  ]);
+
+  const updateCart = (items: any[]) => setCartItems(items);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/checkout" element={<Checkout />} />
-      </Routes>
-    </Router>
+    <>
+      <Navbar cartItems={cartItems} />
+      <HomePage cartItems={cartItems} updateCart={updateCart} />
+    </>
   );
-}
+};
+
+export default App;
